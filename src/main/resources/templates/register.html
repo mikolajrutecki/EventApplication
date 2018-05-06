@@ -1,45 +1,54 @@
 <!doctype html>
-<html lang="pl">
-    <head>
-            <title>Register page</title>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <body>
-    <div class=jumbotron>
-        <div class="container">
-            <h1 class="display-2">Register here</h1>
-            <div class="col-sm-5">
-                    <form>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login" type="text" class="form-control" name="login" placeholder="Login" required>
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required>
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                            <input id="companyName" type="text" class="form-control" name="companyName" placeholder="Company" required>
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                            <input id="nip" type="tel" pattern="([0-9]{3}-)([0-9]{2}-)([0-9]{2}-)([0-9]{3})" title="Format: XXX-XX-XX-XXX" class="form-control" name="nip" placeholder="NIP" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
-                    </form>
-                    <a href="login" class="btn btn-link">Go back to login page</a>
-            </div>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class=jumbotron>
+    <div class="container">
+        <h1 class="display-2">Register here</h1>
+        <div class="col-sm-5">
+            <form action="/register" th:object="${user}" method="POST" enctype="utf8">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="login" th:field="*{username}" type="text" class="form-control" name="login" placeholder="Login" required>
+                    <p th:each="error: ${#fields.errors('username')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="password" th:field="*{password}" type="password" class="form-control" name="password" placeholder="Password" required>
+                    <p th:each="error: ${#fields.errors('password')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="confirm_password" th:field="*{matchingPassword}" type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                    <input id="company" th:field="*{companyName}" type="text" class="form-control" name="company" placeholder="Company" required>
+                    <p th:each="error : ${#fields.errors('companyName')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                    <input id="nip" th:field="*{nip}" type="tel" pattern="([0-9]{3}-)([0-9]{2}-)([0-9]{2}-)([0-9]{3})" title="Format: XXX-XX-XX-XXX" class="form-control" name="nip" placeholder="NIP" required>
+                    <p th:each="error : ${#fields.errors('nip')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            <a th:href="@{/login}" class="btn btn-link">Go back to login page</a>
         </div>
     </div>
-    <script>
+</div>
+<script>
         function validatePassword(){
             var password = document.getElementById("password")
             var confirm_password = document.getElementById("confirm_password");
@@ -53,5 +62,5 @@
         password.onchange = validatePassword;
         confirm_password.onchange = validatePassword;
     </script>
-    </body>
+</body>
 </html>
