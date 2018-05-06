@@ -1,35 +1,39 @@
 package com.example.SpringPSS;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String login;
+    private Long id;
+    @Column(nullable = false, unique = true)
+    private String username;
+    @Column(nullable = false, length = 60)
     private String password;
     private Integer nip;
-    private Integer companyName;
-    private String privilege; //zmien na enum
+    @Size(min=3, max=40)
+    private String companyName;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -48,19 +52,19 @@ public class User {
         this.nip = nip;
     }
 
-    public Integer getCompanyName() {
+    public String getCompanyName() {
         return companyName;
     }
 
-    public void setCompanyName(Integer companyName) {
+    public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 
-    public String getPrivilege() {
-        return privilege;
+    public Collection<Role> getRoles() {
+        return roles;
     }
 
-    public void setPrivilege(String privilege) {
-        this.privilege = privilege;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }
