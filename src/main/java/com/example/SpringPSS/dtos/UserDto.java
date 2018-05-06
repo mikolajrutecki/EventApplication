@@ -20,7 +20,7 @@ public class UserDto {
 
     @NotNull
     @NotEmpty
-    private Integer nip;
+    private String nip;
 
     @NotNull
     @NotEmpty
@@ -31,7 +31,7 @@ public class UserDto {
     }
 
     public UserDto(@NotNull @NotEmpty String username, @NotNull @NotEmpty String password, String matchingPassword,
-                   @NotNull @NotEmpty Integer nip, @NotNull @NotEmpty String companyName) {
+                   @NotNull @NotEmpty String nip, @NotNull @NotEmpty String companyName) {
         this.username = username;
         this.password = password;
         this.matchingPassword = matchingPassword;
@@ -63,11 +63,11 @@ public class UserDto {
         this.matchingPassword = matchingPassword;
     }
 
-    public Integer getNip() {
+    public String getNip() {
         return nip;
     }
 
-    public void setNip(Integer nip) {
+    public void setNip(String nip) {
         this.nip = nip;
     }
 

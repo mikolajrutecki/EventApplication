@@ -31,12 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/index", "/register").permitAll()
                 .antMatchers("/user/**").hasAuthority("READ_PRIVILEGE")
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .formLogin().loginPage("/login").permitAll()
                 .and()
-                .logout()
-                .permitAll();
+                .logout().permitAll();
     }
 
     @Bean

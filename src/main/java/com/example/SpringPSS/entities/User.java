@@ -23,7 +23,8 @@ public class User {
     private String password;
 
     @NotNull
-    private Integer nip;
+    @Size(min=3, max=20)
+    private String nip;
 
     @NotNull
     @Size(min=3, max=40)
@@ -58,11 +59,11 @@ public class User {
         this.password = password;
     }
 
-    public Integer getNip() {
+    public String getNip() {
         return nip;
     }
 
-    public void setNip(Integer nip) {
+    public void setNip(String nip) {
         this.nip = nip;
     }
 

@@ -64,7 +64,7 @@ public class MainController {
             return new ModelAndView("register", "user", userDto);
         }
         else {
-            return new ModelAndView("successRegister", "user", userDto);
+            return new ModelAndView("index", "user", userDto);
         }
     }
 

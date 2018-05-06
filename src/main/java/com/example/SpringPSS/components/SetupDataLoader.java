@@ -45,7 +45,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         try {
             userService.registerNewUserAccount(new UserDto("user", "password",
-                    "password", 33344, "company"));
+                    "password", "33344", "company"));
         } catch (Exception e) {
             e.printStackTrace();
         }
