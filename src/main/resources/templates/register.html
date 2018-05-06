@@ -1,48 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Register page</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1 th:text="Register">form</h1>
-<form action="/register" th:object="${user}" method="POST" enctype="utf8">
-    <div>
-        <label>Username</label>
-        <input th:field="*{username}"/>
-        <p th:each="error: ${#fields.errors('username')}"
-           th:text="${error}">Validation error</p>
+<div class=jumbotron>
+    <div class="container">
+        <h1 class="display-2">Register here</h1>
+        <div class="col-sm-5">
+            <form action="/register" th:object="${user}" method="POST" enctype="utf8">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="login" th:field="*{username}" type="text" class="form-control" name="login" placeholder="Login" required>
+                    <p th:each="error: ${#fields.errors('username')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="password" th:field="*{password}" type="password" class="form-control" name="password" placeholder="Password" required>
+                    <p th:each="error: ${#fields.errors('password')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="confirm_password" th:field="*{matchingPassword}" type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                    <input id="company" th:field="*{companyName}" type="text" class="form-control" name="company" placeholder="Company" required>
+                    <p th:each="error : ${#fields.errors('companyName')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                    <input id="nip" th:field="*{nip}" type="tel" pattern="([0-9]{3}-)([0-9]{2}-)([0-9]{2}-)([0-9]{3})" title="Format: XXX-XX-XX-XXX" class="form-control" name="nip" placeholder="NIP" required>
+                    <p th:each="error : ${#fields.errors('nip')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            <a th:href="@{/login}" class="btn btn-link">Go back to login page</a>
+        </div>
     </div>
-    <div>
-        <label>Password</label>
-        <input type="password" th:field="*{password}"/>
-        <p th:each="error : ${#fields.errors('password')}"
-           th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label>Confirm password</label>
-        <input type="password" th:field="*{matchingPassword}"/>
-    </div>
-    <div>
-        <label>NIP</label>
-        <input th:field="*{nip}"/>
-        <p th:each="error : ${#fields.errors('nip')}"
-           th:text="${error}">Validation error</p>
-    </div>
-    <div>
-        <label>Company name</label>
-        <input th:field="*{companyName}"/>
-        <p th:each="error : ${#fields.errors('companyName')}"
-           th:text="${error}">Validation error</p>
-    </div>
+</div>
+<script>
+        function validatePassword(){
+            var password = document.getElementById("password")
+            var confirm_password = document.getElementById("confirm_password");
 
-    <button type="submit">Submit</button>
-    <input type="hidden"
-           name="${_csrf.parameterName}"
-           value="${_csrf.token}"/>
-</form>
-
-<a th:href="@{/login}">Go to login page</a>
+            if(password.value != confirm_password.value){
+                confirm_password.setCustomValidity("Passwords don't match!");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+        password.onchange = validatePassword;
+        confirm_password.onchange = validatePassword;
+    </script>
 </body>
 </html>

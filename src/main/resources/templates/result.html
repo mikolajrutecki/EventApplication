@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pl">
+    <head>
+            <title>Result</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <body>
+    <div class=jumbotron>
+        <div class="container">
+            <h1 class="display-2"><strong>Result</strong></h1>
+            <h2>Diety</h2>
+            <div class="form-group row">
+                <div class="col-xs-3">
+                    <span><i class="glyphicon glyphicon-road"></i></span>
+                    <strong>Data wyjazdu: </strong>${startDate}
+                </div>
+                <div class="col-xs-3">
+                    <strong>Data powrotu: </strong>${endDate}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-xs-3">
+                    <span><i class="glyphicon glyphicon-time"></i></span>
+                    <strong>Czas podróży: </strong>${duration}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-xs-3">
+                    <span><i class="glyphicon glyphicon-eur"></i></span>
+                    <strong>Wysokość diet: </strong>${pricePerDay}zł
+                </div>
+            </div>
+
+            <h2>Zwrot kosztów przejazdu</h2>
+
+            <div class="form-group row">
+                <div class="col-xs-3">
+                    ${checkCC}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-xs-4">
+                    <span><i class="glyphicon glyphicon-road"></i></span>
+                    <strong>Koszty przejazdów wg kilometrówki: </strong>${countKM}zł      
+                </div>
+            </div>
+
+            <h2>Wynik</h2>
+
+            <div class="form-group row">
+                <div class="col-xs-3">
+                    <span><i class="glyphicon glyphicon-search"></i></span>
+                    <strong>Suma kosztów: </strong>${sum}zł<br>
+                    <span><i class="glyphicon glyphicon-ok"></i></span>
+                    <strong>Do wypłaty: </strong>${finalSum}zł
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+</html>
