@@ -1,6 +1,7 @@
-package com.example.SpringPSS;
+package com.example.SpringPSS.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 
@@ -19,8 +20,10 @@ public class User {
     @Column(nullable = false, length = 60)
     private String password;
 
+    @NotNull
     private Integer nip;
 
+    @NotNull
     @Size(min=3, max=40)
     private String companyName;
 

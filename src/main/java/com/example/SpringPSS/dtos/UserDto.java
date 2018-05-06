@@ -1,4 +1,6 @@
-package com.example.SpringPSS;
+package com.example.SpringPSS.dtos;
+
+import com.example.SpringPSS.security.PasswordMatches;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -23,6 +25,19 @@ public class UserDto {
     @NotNull
     @NotEmpty
     private String companyName;
+
+    public UserDto() {
+
+    }
+
+    public UserDto(@NotNull @NotEmpty String username, @NotNull @NotEmpty String password, String matchingPassword,
+                   @NotNull @NotEmpty Integer nip, @NotNull @NotEmpty String companyName) {
+        this.username = username;
+        this.password = password;
+        this.matchingPassword = matchingPassword;
+        this.nip = nip;
+        this.companyName = companyName;
+    }
 
     public String getUsername() {
         return username;

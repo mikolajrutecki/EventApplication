@@ -1,5 +1,6 @@
-package com.example.SpringPSS;
+package com.example.SpringPSS.security;
 
+import com.example.SpringPSS.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,19 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/css/**", "/index").permitAll()
+                .antMatchers("/css/**", "/index", "/register").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .and()
                 .formLogin()
                 .loginPage("/login").failureUrl("/login-error");
     }
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("user").password("password").roles("USER");
-//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {

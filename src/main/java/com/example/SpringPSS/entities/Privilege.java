@@ -1,4 +1,4 @@
-package com.example.SpringPSS;
+package com.example.SpringPSS.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;

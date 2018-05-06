@@ -1,5 +1,9 @@
-package com.example.SpringPSS;
+package com.example.SpringPSS.services;
 
+import com.example.SpringPSS.entities.Privilege;
+import com.example.SpringPSS.entities.Role;
+import com.example.SpringPSS.entities.User;
+import com.example.SpringPSS.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

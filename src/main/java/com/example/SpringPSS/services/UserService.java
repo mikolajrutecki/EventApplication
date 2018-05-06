@@ -1,5 +1,9 @@
-package com.example.SpringPSS;
+package com.example.SpringPSS.services;
 
+import com.example.SpringPSS.dtos.UserDto;
+import com.example.SpringPSS.entities.User;
+import com.example.SpringPSS.repositories.RoleRepository;
+import com.example.SpringPSS.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

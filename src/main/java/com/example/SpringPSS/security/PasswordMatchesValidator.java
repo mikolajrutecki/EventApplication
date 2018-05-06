@@ -1,4 +1,6 @@
-package com.example.SpringPSS;
+package com.example.SpringPSS.security;
+
+import com.example.SpringPSS.dtos.UserDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

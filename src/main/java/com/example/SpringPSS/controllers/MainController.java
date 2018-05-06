@@ -1,5 +1,9 @@
-package com.example.SpringPSS;
+package com.example.SpringPSS.controllers;
 
+import com.example.SpringPSS.dtos.UserDto;
+import com.example.SpringPSS.entities.User;
+import com.example.SpringPSS.repositories.UserRepository;
+import com.example.SpringPSS.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,42 +14,19 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
 public class MainController {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/greeting")
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Greeting(counter.incrementAndGet(),
-                String.format(template, name));
-    }
-
-    @GetMapping(path="/add")
-    public @ResponseBody String addNewUser(@RequestParam String username, @RequestParam String password) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        userRepository.save(user);
-        return "Saved";
-    }
-
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
-//
-//    @RequestMapping("/")
-//    public String root() {
-//        return "redirect:/index";
-//    }
 
     @RequestMapping("/index")
     public String index() {
