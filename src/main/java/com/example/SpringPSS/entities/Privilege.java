@@ -1,6 +1,6 @@
 package com.example.SpringPSS.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -17,7 +17,7 @@ public class Privilege {
     private String name;
 
     @ManyToMany(mappedBy = "privileges")
-    @JsonIgnoreProperties("privileges")
+    @JsonBackReference
     private Collection<Role> roles;
 
     public Privilege() {

@@ -1,6 +1,7 @@
 package com.example.SpringPSS.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -17,12 +18,12 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    @JsonIgnoreProperties("roles")
+    @JsonBackReference
     private Collection<User> users;
 
     @ManyToMany
     @JoinTable(name = "roles_privileges", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
-    @JsonIgnoreProperties("roles")
+    @JsonManagedReference
     private Collection<Privilege> privileges;
 
 
