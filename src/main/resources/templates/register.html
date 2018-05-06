@@ -38,6 +38,9 @@
     </div>
 
     <button type="submit">Submit</button>
+    <input type="hidden"
+           name="${_csrf.parameterName}"
+           value="${_csrf.token}"/>
 </form>
 
 <a th:href="@{/login}">Go to login page</a>
