@@ -6,16 +6,24 @@ import java.util.Collection;
 
 @Entity
 public class User {
+
     @Id
+    @Column(unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column(nullable = false, unique = true)
+    @Size(min=3, max=40)
     private String username;
+
     @Column(nullable = false, length = 60)
     private String password;
+
     private Integer nip;
+
     @Size(min=3, max=40)
     private String companyName;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;

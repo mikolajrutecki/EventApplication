@@ -27,7 +27,7 @@ public class UserService {
         user.setNip(accountDto.getNip());
         user.setCompanyName(accountDto.getCompanyName());
         user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
-        user.setRoles(Collections.singletonList(roleRepository.findByName("ROLE_USER")));
+        user.setRoles(Collections.singletonList(roleRepository.findByName("USER")));
         return userRepository.save(user);
     }
 
