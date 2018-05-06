@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1 th:text="Register">form</h1>
-<form action="/" th:object="${user}" method="POST" enctype="utf8">
+<form action="/register" th:object="${user}" method="POST" enctype="utf8">
     <div>
         <label>Username</label>
         <input th:field="*{username}"/>
