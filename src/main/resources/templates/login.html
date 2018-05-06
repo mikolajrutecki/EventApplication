@@ -7,14 +7,19 @@
 </head>
 <body>
 <h1>Login page</h1>
-<p th:if="${loginError}" class="error">Wrong user or password</p>
-<p>Log in as a default user with username "user" and password "password"</p>
+<div th:if="${param.error}" class="alert alert-error">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}" class="alert alert-success">
+    You have been logged out.
+</div>
+<p>You can log in as a default user with username "user" and password "password".</p>
 <form th:action="@{/login}" method="post">
     <label for="username">Username</label>:
     <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
     <label for="password">Password</label>:
     <input type="password" id="password" name="password" /> <br />
-    <input type="submit" value="Log in" />
+    <button type="submit" class="btn">Log in</button>
 </form>
 <p><a th:href="@{/index}">Back to home page</a></p>
 </body>

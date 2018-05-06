@@ -33,11 +33,8 @@ public class MyUserDetailsService implements UserDetailsService {
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
-        return new org.springframework.security.core.userdetails.User
-                (user.getUsername(),
-                        user.getPassword().toLowerCase(), enabled, accountNonExpired,
-                        credentialsNonExpired, accountNonLocked,
-                        getAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), enabled,
+                accountNonExpired, credentialsNonExpired, accountNonLocked, getAuthorities(user.getRoles()));
     }
 
     private final Collection<? extends GrantedAuthority> getAuthorities(final Collection<Role> roles) {

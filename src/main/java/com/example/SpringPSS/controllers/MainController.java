@@ -43,12 +43,6 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping("/login-error")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "login";
-    }
-
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(WebRequest request, Model model) {
         UserDto userDto = new UserDto();
