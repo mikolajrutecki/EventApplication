@@ -1,5 +1,7 @@
 package com.example.SpringPSS.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Collection;
@@ -15,6 +17,7 @@ public class Privilege {
     private String name;
 
     @ManyToMany(mappedBy = "privileges")
+    @JsonIgnoreProperties("privileges")
     private Collection<Role> roles;
 
     public Privilege() {
