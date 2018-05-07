@@ -38,7 +38,7 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/user/index")
+    @RequestMapping(value = "/user/index", method = RequestMethod.GET)
     public String userIndex() {
         return "/user/index";
     }
@@ -73,9 +73,9 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value="/", method = RequestMethod.GET)
+    @RequestMapping(value="/user/index", method = RequestMethod.POST)
     public ModelAndView getInfo(){
-        ModelAndView model = new ModelAndView("index");
+        ModelAndView model = new ModelAndView("/user/index");
 
         return model;
     }
@@ -130,9 +130,9 @@ public class MainController {
     //checks if user used >900cc or <900cc and returns amount of kilometers
     private String checkCC(String below900cc, String above900cc, String motocycle, String motorbike){
         if(!below900cc.isEmpty()) return "Przejazd samochodem osobowym(<=900cm3): " +below900cc +"km";
-        else if(!above900cc.isEmpty()) return "Przejazd samochodem osobowym(>900cm3): "+above900cc+"km";
-        else if(!motocycle.isEmpty()) return "Przejazd motocyklem: "+motocycle+"km";
-        else if(!motorbike.isEmpty()) return "Przejazd motorowerem" +motorbike+"km";
+        if(!above900cc.isEmpty()) return "Przejazd samochodem osobowym(>900cm3): "+above900cc+"km";
+        if(!motocycle.isEmpty()) return "Przejazd motocyklem: "+motocycle+"km";
+        if(!motorbike.isEmpty()) return "Przejazd motorowerem" +motorbike+"km";
         else return "Brak wyboru transportu";
     }
     //counts price per kilometer
