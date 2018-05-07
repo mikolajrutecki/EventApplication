@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pl">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
             <title>Login page</title>
             <meta charset="utf-8">
@@ -12,10 +12,10 @@
         <div class="container">
             <h1 class="display-2">Log in here</h1>
             <div class="col-sm-5">
-                    <form action="">
+                    <form action="/login" method="post">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="login" type="text" class="form-control" name="login" placeholder="Login" required>
+                                <input id="username" type="text" class="form-control" name="username" placeholder="Login" required>
                             </div>
             
                             <div class="input-group">
