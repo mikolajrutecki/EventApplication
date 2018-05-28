@@ -150,7 +150,7 @@ public class MainController {
     public String adminEnablePost(@ModelAttribute("usersWrapper") UsersWrapper usersWrapper, BindingResult result,
                                         WebRequest request, Errors errors) {
         System.out.println("dd");
-        System.out.println(usersWrapper.getUsers().get(5).isEnabled());
+        System.out.println(usersWrapper.getUsers().get(5).getEnabled());
         return "/admin/index";
 
     }

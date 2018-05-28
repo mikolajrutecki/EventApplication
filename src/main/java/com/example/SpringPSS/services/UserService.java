@@ -30,7 +30,7 @@ public class UserService {
         user.setCompanyName(userDto.getCompanyName());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRoles(userDto.getRoles());
-        user.setEnabled(userDto.isEnabled());
+        user.setEnabled(userDto.getEnabled());
         return userRepository.save(user);
     }
 

@@ -31,7 +31,7 @@ public class User {
     private Collection<Role> roles;
 
     @Column(nullable = false)
-    private boolean enabled;
+    private Boolean enabled;
 
     public Long getId() {
         return id;
@@ -81,11 +81,11 @@ public class User {
         this.roles = roles;
     }
 
-    public boolean isEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 }

@@ -4,41 +4,38 @@ import com.example.SpringPSS.entities.Role;
 import com.example.SpringPSS.security.PasswordMatches;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @PasswordMatches
 public class UserDto {
 
-    @NotNull
     @NotEmpty
     private String username;
 
-    @NotNull
     @NotEmpty
     private String password;
 
     private String matchingPassword;
 
-    @NotNull
     @NotEmpty
     private String nip;
 
-    @NotNull
     @NotEmpty
     private String companyName;
 
+    @NotEmpty
     private List<Role> roles;
 
-    private boolean enabled;
+    @NotEmpty
+    private Boolean enabled;
 
     public UserDto() {
 
     }
 
-    public UserDto(@NotNull @NotEmpty String username, @NotNull @NotEmpty String password, String matchingPassword,
-                   @NotNull @NotEmpty String nip, @NotNull @NotEmpty String companyName,
-                   @NotNull @NotEmpty List<Role> roles, boolean enabled) {
+    public UserDto(@NotEmpty String username, @NotEmpty String password, String matchingPassword,
+                   @NotEmpty String nip, @NotEmpty String companyName,
+                   @NotEmpty List<Role> roles, @NotEmpty Boolean enabled) {
         this.username = username;
         this.password = password;
         this.matchingPassword = matchingPassword;
@@ -96,11 +93,11 @@ public class UserDto {
         this.roles = roles;
     }
 
-    public boolean isEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 }

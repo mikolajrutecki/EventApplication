@@ -16,13 +16,23 @@
                 <table class="table table-hover">
                     <tr>
                         <th>Login</th>
-                        <th>Enabled?</th>
+                        <th>Status</th>
                     </tr>
                     <tr th:each="user, stat : ${usersWrapper.users}">
                         <td th:text="${user.username}"></td>
                         <td>
-                            <input type="checkbox" th:id="'user'+${user.id}" th:value="${user.id}"
-                                   th:name="|users[${user.id}].id|" th:checked=${user.enabled}/>
+                            <div th:class="'input-group'+${user.id}" th:id="'user'+${user.id}">
+                                <label class="radio-inline"><input type="radio" th:name="'enableRadio'+${user.id}" value="true" th:checked=${user.enabled}>Enable</label>
+                                <label class="radio-inline"><input type="radio" th:name="'enableRadio'+${user.id}" value="false" th:checked=${!user.enabled}>Disable</label>
+                                <!--<label class="radio-inline">-->
+                                    <!--<input type="radio" th:name="'enableRadio'+${user.id}" th:field="*{user.enabled}"-->
+                                           <!--th:value="true">Enable-->
+                                <!--</label>-->
+                                <!--<label class="radio-inline">-->
+                                    <!--<input type="radio" th:name="'enableRadio'+${user.id}"th:field="*{user.enabled}"-->
+                                           <!--th:value="false">Disable-->
+                                <!--</label>-->
+                            </div>
                         </td>
                     </tr>
                 </table>
