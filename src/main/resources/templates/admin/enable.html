@@ -1,0 +1,35 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body>
+<div class=jumbotron>
+    <div class="container">
+        <h1 class="display-2">Enable or disable user\admin</h1>
+        <div class="col-sm-5">
+            <form action="/admin/enable" method="POST" enctype="utf8">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Login</th>
+                        <th>Enabled?</th>
+                    </tr>
+                    <tr th:each="user, stat : ${usersWrapper.users}">
+                        <td th:text="${user.username}"></td>
+                        <td>
+                            <input type="checkbox" th:id="'user'+${user.id}" th:value="${user.id}"
+                                   th:name="|users[${user.id}].id|" th:checked=${user.enabled}/>
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

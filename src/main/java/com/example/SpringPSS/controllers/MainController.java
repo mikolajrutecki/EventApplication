@@ -1,6 +1,7 @@
 package com.example.SpringPSS.controllers;
 
 import com.example.SpringPSS.dtos.UserDto;
+import com.example.SpringPSS.dtos.UsersWrapper;
 import com.example.SpringPSS.entities.User;
 import com.example.SpringPSS.repositories.RoleRepository;
 import com.example.SpringPSS.repositories.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -61,6 +63,7 @@ public class MainController {
         User registered = new User();
         if (!result.hasErrors()) {
             userDto.setRoles(Collections.singletonList(roleRepository.findByName("ROLE_USER")));
+            userDto.setEnabled(false);
             registered = createUserAccount(userDto);
         }
         if (registered == null) {
@@ -99,16 +102,27 @@ public class MainController {
     @RequestMapping(value = "/admin/register", method = RequestMethod.POST)
     public ModelAndView adminPanelRegisterUserAccount(@ModelAttribute("user") @Valid UserDto userDto,
                                             BindingResult result, WebRequest request, Errors errors) {
-        String value = request.getParameter("roleRadio");
-        if (value == null) {
+        String roleRadio = request.getParameter("roleRadio");
+        if (roleRadio == null) {
             return new ModelAndView("admin/register", "user", userDto);
         }
-        if (value.equals("user")) {
+        if (roleRadio.equals("user")) {
             userDto.setRoles(Collections.singletonList(roleRepository.findByName("ROLE_USER")));
-        } else if (value.equals("admin")) {
+        } else if (roleRadio.equals("admin")) {
             userDto.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER"),
                     roleRepository.findByName("ROLE_ADMIN")));
         }
+
+        String enableRadio = request.getParameter("enableRadio");
+        if (enableRadio == null) {
+            return new ModelAndView("admin/register", "user", userDto);
+        }
+        if (enableRadio.equals("true")) {
+            userDto.setEnabled(true);
+        } else if (enableRadio.equals("false")) {
+            userDto.setEnabled(false);
+        }
+
         User registered = new User();
         if (!result.hasErrors()) {
             registered = createUserAccount(userDto);
@@ -124,4 +138,20 @@ public class MainController {
         }
     }
 
+    @RequestMapping(value = "/admin/enable", method = RequestMethod.GET)
+    public String adminEnable(Model model) {
+        UsersWrapper usersWrapper = new UsersWrapper();
+        usersWrapper.setUsers((ArrayList<User>)userRepository.findAll());
+        model.addAttribute("usersWrapper", usersWrapper);
+        return "/admin/enable";
+    }
+
+    @RequestMapping(value = "/admin/enable", method = RequestMethod.POST)
+    public String adminEnablePost(@ModelAttribute("usersWrapper") UsersWrapper usersWrapper, BindingResult result,
+                                        WebRequest request, Errors errors) {
+        System.out.println("dd");
+        System.out.println(usersWrapper.getUsers().get(5).isEnabled());
+        return "/admin/index";
+
+    }
 }

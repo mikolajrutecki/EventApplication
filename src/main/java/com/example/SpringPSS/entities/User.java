@@ -30,6 +30,9 @@ public class User {
     @JsonManagedReference
     private Collection<Role> roles;
 
+    @Column(nullable = false)
+    private boolean enabled;
+
     public Long getId() {
         return id;
     }
@@ -76,5 +79,13 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

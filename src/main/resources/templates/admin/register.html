@@ -46,9 +46,13 @@
                     <label class="radio-inline"><input type="radio" name="roleRadio" value="user" checked>User</label>
                     <label class="radio-inline"><input type="radio" name="roleRadio" value="admin">Admin</label>
                 </div>
+                <div class="input-group">
+                    <label class="radio-inline"><input type="radio" name="enableRadio" value="true" checked>Enable</label>
+                    <label class="radio-inline"><input type="radio" name="enableRadio" value="false">Disable</label>
+                </div>
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
-            <a th:href="@{admin/index}" class="btn btn-link">Go back to admin panel</a>
+            <a th:href="@{/admin/index}" class="btn btn-link">Go back to admin panel</a>
         </div>
     </div>
 </div>

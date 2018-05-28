@@ -29,12 +29,12 @@ public class MyUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("No user found with username: " + username);
         }
-        boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), enabled,
-                accountNonExpired, credentialsNonExpired, accountNonLocked, getAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+                user.isEnabled(), accountNonExpired, credentialsNonExpired, accountNonLocked,
+                getAuthorities(user.getRoles()));
     }
 
     private final Collection<? extends GrantedAuthority> getAuthorities(final Collection<Role> roles) {

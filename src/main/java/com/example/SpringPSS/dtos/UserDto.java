@@ -30,18 +30,22 @@ public class UserDto {
 
     private List<Role> roles;
 
+    private boolean enabled;
+
     public UserDto() {
 
     }
 
     public UserDto(@NotNull @NotEmpty String username, @NotNull @NotEmpty String password, String matchingPassword,
-                   @NotNull @NotEmpty String nip, @NotNull @NotEmpty String companyName, List<Role> roles) {
+                   @NotNull @NotEmpty String nip, @NotNull @NotEmpty String companyName,
+                   @NotNull @NotEmpty List<Role> roles, boolean enabled) {
         this.username = username;
         this.password = password;
         this.matchingPassword = matchingPassword;
         this.nip = nip;
         this.companyName = companyName;
         this.roles = roles;
+        this.enabled = enabled;
     }
 
     public String getUsername() {
@@ -90,5 +94,13 @@ public class UserDto {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
