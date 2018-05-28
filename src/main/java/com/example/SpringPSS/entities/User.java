@@ -3,8 +3,6 @@ package com.example.SpringPSS.entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -15,19 +13,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    @Size(min=3, max=40)
+    @Column(nullable = false, unique = true, length = 40)
     private String username;
 
     @Column(nullable = false, length = 60)
     private String password;
 
-    @NotNull
-    @Size(min=3, max=20)
+    @Column(nullable = false, length = 20)
     private String nip;
 
-    @NotNull
-    @Size(min=3, max=40)
+    @Column(nullable = false, length = 40)
     private String companyName;
 
     @ManyToMany(fetch = FetchType.EAGER)

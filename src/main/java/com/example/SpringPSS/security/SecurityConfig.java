@@ -29,12 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/css/**", "/index", "/register").permitAll()
-                .antMatchers("/user/**").hasAuthority("READ_PRIVILEGE")
+                .antMatchers("/user/**").hasAuthority("USER_PRIVILEGE")
+                .antMatchers("/admin/**").hasAuthority("ADMIN_PRIVILEGE")
                 .and()
-                .formLogin().loginPage("/login").permitAll()
+                .formLogin().loginPage("/login")
                 .and()
-                .logout().permitAll();
+                .logout();
     }
 
     @Bean

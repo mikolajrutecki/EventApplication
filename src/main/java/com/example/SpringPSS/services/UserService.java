@@ -9,8 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-
 @Service
 public class UserService {
 
@@ -22,16 +20,16 @@ public class UserService {
     private RoleRepository roleRepository;
 
     @Transactional
-    public User registerNewUserAccount(UserDto accountDto) throws Exception {
-        if (userRepository.existsByUsername(accountDto.getUsername())) {
-            throw new Exception("There is an account with that username: " + accountDto.getUsername());
+    public User registerNewUserAccount(UserDto userDto) throws Exception {
+        if (userRepository.existsByUsername(userDto.getUsername())) {
+            throw new Exception("There is an account with that username: " + userDto.getUsername());
         }
         User user = new User();
-        user.setUsername(accountDto.getUsername());
-        user.setNip(accountDto.getNip());
-        user.setCompanyName(accountDto.getCompanyName());
-        user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
-        user.setRoles(Collections.singletonList(roleRepository.findByName("ROLE_USER")));
+        user.setUsername(userDto.getUsername());
+        user.setNip(userDto.getNip());
+        user.setCompanyName(userDto.getCompanyName());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRoles(userDto.getRoles());
         return userRepository.save(user);
     }
 

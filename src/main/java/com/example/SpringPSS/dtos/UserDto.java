@@ -1,9 +1,11 @@
 package com.example.SpringPSS.dtos;
 
+import com.example.SpringPSS.entities.Role;
 import com.example.SpringPSS.security.PasswordMatches;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @PasswordMatches
 public class UserDto {
@@ -26,17 +28,20 @@ public class UserDto {
     @NotEmpty
     private String companyName;
 
+    private List<Role> roles;
+
     public UserDto() {
 
     }
 
     public UserDto(@NotNull @NotEmpty String username, @NotNull @NotEmpty String password, String matchingPassword,
-                   @NotNull @NotEmpty String nip, @NotNull @NotEmpty String companyName) {
+                   @NotNull @NotEmpty String nip, @NotNull @NotEmpty String companyName, List<Role> roles) {
         this.username = username;
         this.password = password;
         this.matchingPassword = matchingPassword;
         this.nip = nip;
         this.companyName = companyName;
+        this.roles = roles;
     }
 
     public String getUsername() {
@@ -77,5 +82,13 @@ public class UserDto {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

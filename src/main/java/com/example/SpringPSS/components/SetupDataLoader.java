@@ -34,22 +34,25 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         if (alreadySetup) {
             return;
         }
-        final Privilege readPrivilege = createPrivilegeIfNotFound("READ_PRIVILEGE");
-        final Privilege writePrivilege = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
+        final Privilege userPrivilege = createPrivilegeIfNotFound("USER_PRIVILEGE");
+        final Privilege adminPrivilege = createPrivilegeIfNotFound("ADMIN_PRIVILEGE");
 
-        final List<Privilege> adminPrivileges = new ArrayList<>(Arrays.asList(readPrivilege, writePrivilege));
-        final List<Privilege> userPrivileges = new ArrayList<>(Collections.singletonList(readPrivilege));
+        final List<Privilege> adminPrivileges = new ArrayList<>(Arrays.asList(userPrivilege, adminPrivilege));
+        final List<Privilege> userPrivileges = new ArrayList<>(Collections.singletonList(userPrivilege));
 
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
         createRoleIfNotFound("ROLE_USER", userPrivileges);
 
         try {
-            userService.registerNewUserAccount(new UserDto("user", "password",
-                    "password", "33344", "company"));
+            userService.registerNewUserAccount(new UserDto("user", "user",
+                    "user", "33344", "company",
+                    Collections.singletonList(roleRepository.findByName("ROLE_USER"))));
+            userService.registerNewUserAccount(new UserDto("admin", "admin",
+                    "admin", "55544", "Better Company",
+                    Arrays.asList(roleRepository.findByName("ROLE_USER"), roleRepository.findByName("ROLE_ADMIN"))));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         alreadySetup = true;
     }
 
