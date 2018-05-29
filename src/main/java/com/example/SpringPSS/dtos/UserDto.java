@@ -23,10 +23,8 @@ public class UserDto {
     @NotEmpty
     private String companyName;
 
-    @NotEmpty
     private List<Role> roles;
 
-    @NotEmpty
     private Boolean enabled;
 
     public UserDto() {
@@ -35,7 +33,7 @@ public class UserDto {
 
     public UserDto(@NotEmpty String username, @NotEmpty String password, String matchingPassword,
                    @NotEmpty String nip, @NotEmpty String companyName,
-                   @NotEmpty List<Role> roles, @NotEmpty Boolean enabled) {
+                   List<Role> roles, Boolean enabled) {
         this.username = username;
         this.password = password;
         this.matchingPassword = matchingPassword;
