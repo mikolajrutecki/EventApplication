@@ -6,12 +6,13 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
     @Column(unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     @Column(nullable = false, unique = true, length = 40)
     private String username;
@@ -33,11 +34,11 @@ public class User {
     @Column(nullable = false)
     private Boolean enabled;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

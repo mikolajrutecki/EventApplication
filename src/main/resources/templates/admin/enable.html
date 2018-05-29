@@ -18,22 +18,13 @@
                         <th>Login</th>
                         <th>Status</th>
                     </tr>
-                    <tr th:each="user, stat : ${usersWrapper.users}">
+                    <tr th:each="user : ${usersWrapper.users}">
                         <td th:text="${user.username}"></td>
-                        <td>
-                            <div th:class="'input-group'+${user.id}" th:id="'user'+${user.id}">
-                                <label class="radio-inline"><input type="radio" th:name="'enableRadio'+${user.id}" value="true" th:checked=${user.enabled}>Enable</label>
-                                <label class="radio-inline"><input type="radio" th:name="'enableRadio'+${user.id}" value="false" th:checked=${!user.enabled}>Disable</label>
-                                <!--<label class="radio-inline">-->
-                                    <!--<input type="radio" th:name="'enableRadio'+${user.id}" th:field="*{user.enabled}"-->
-                                           <!--th:value="true">Enable-->
-                                <!--</label>-->
-                                <!--<label class="radio-inline">-->
-                                    <!--<input type="radio" th:name="'enableRadio'+${user.id}"th:field="*{user.enabled}"-->
-                                           <!--th:value="false">Disable-->
-                                <!--</label>-->
-                            </div>
-                        </td>
+                        <td th:if="${user.enabled}">Aktywne</td>
+                        <td th:if="${!user.enabled}">Zablokowane</td>
+                        <td></td>
+                        <td th:if="${!user.enabled}"><a th:href="@{../admin/enable/activate?(userId=${user.getId()})}">AKTYWUJ</a></td>
+                        <td th:if="${user.enabled}"><a th:href="@{../admin/enable/deactivate?(userId=${user.getId()})}">DEZAKTYWUJ</a></td>
                     </tr>
                 </table>
                 <button type="submit" class="btn btn-primary">Save</button>

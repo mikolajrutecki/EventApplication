@@ -14,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -146,12 +147,20 @@ public class MainController {
         return "/admin/enable";
     }
 
-    @RequestMapping(value = "/admin/enable", method = RequestMethod.POST)
-    public String adminEnablePost(@ModelAttribute("usersWrapper") UsersWrapper usersWrapper, BindingResult result,
-                                        WebRequest request, Errors errors) {
-        System.out.println("dd");
-        System.out.println(usersWrapper.getUsers().get(5).getEnabled());
-        return "/admin/index";
+    @RequestMapping(value = "/admin/enable/activate{userId}", method = RequestMethod.GET)
+    public RedirectView adminEnablePost(@RequestParam(value = "userId", required = false) int userId, Model model) {
+        User user = userRepository.findUserById(userId);
+        user.setEnabled(true);
+        userRepository.save(user);
 
+        return new RedirectView("/admin/enable");
+    }
+
+    @RequestMapping(value = "/admin/enable/deactivate{userId}", method = RequestMethod.GET)
+    public RedirectView adminDisablePost(@RequestParam(value = "userId", required = false) int userId, Model model){
+        User user = userRepository.findUserById(userId);
+        user.setEnabled(false);
+        userRepository.save(user);
+        return new RedirectView("/admin/enable");
     }
 }
