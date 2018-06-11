@@ -1,5 +1,6 @@
 package com.example.SpringPSS.controllers;
 
+import com.example.SpringPSS.components.EmailSender;
 import com.example.SpringPSS.dtos.UserDto;
 import com.example.SpringPSS.dtos.UsersWrapper;
 import com.example.SpringPSS.entities.User;
@@ -30,6 +31,8 @@ public class MainController {
     private RoleRepository roleRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmailSender emailSender;
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers() {
@@ -64,7 +67,7 @@ public class MainController {
         User registered = new User();
         if (!result.hasErrors()) {
             userDto.setRoles(Collections.singletonList(roleRepository.findByName("ROLE_USER")));
-            userDto.setEnabled(false);
+            userDto.setEnabled(true);
             registered = createUserAccount(userDto);
         }
         if (registered == null) {
@@ -74,6 +77,7 @@ public class MainController {
             return new ModelAndView("register", "user", userDto);
         }
         else {
+            emailSender.sendEmail(userDto.getEmail(), "Stworzyłeś nowe konto!", "Pomyślnie stworzono nowe konto");
             return new ModelAndView("index", "user", userDto);
         }
     }

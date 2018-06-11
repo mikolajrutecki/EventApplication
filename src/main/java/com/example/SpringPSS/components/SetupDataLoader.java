@@ -44,12 +44,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         createRoleIfNotFound("ROLE_USER", userPrivileges);
 
         try {
-            userService.registerNewUserAccount(new UserDto("user", "user",
-                    "user", "33344", "company",
-                    Collections.singletonList(roleRepository.findByName("ROLE_USER")), true));
-            userService.registerNewUserAccount(new UserDto("admin", "admin",
-                    "admin", "55544", "Better Company",
-                    Arrays.asList(roleRepository.findByName("ROLE_USER"), roleRepository.findByName("ROLE_ADMIN")),
+            userService.registerNewUserAccount(new UserDto("user", "user", "user", "user", "user", Collections.singletonList(roleRepository.findByName("ROLE_USER")), true));
+            userService.registerNewUserAccount(new UserDto("admin", "admin", "admin", "admin", "admin", Arrays.asList(roleRepository.findByName("ROLE_USER"), roleRepository.findByName("ROLE_ADMIN")),
                     true));
         } catch (Exception e) {
             e.printStackTrace();

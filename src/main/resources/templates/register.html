@@ -32,14 +32,20 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                    <input id="company" th:field="*{companyName}" type="text" class="form-control" name="company" placeholder="Company" required>
-                    <p th:each="error : ${#fields.errors('companyName')}"
+                    <input id="firstName" th:field="*{firstName}" type="text" class="form-control" name="firstName" placeholder="First Name" required>
+                    <p th:each="error : ${#fields.errors('firstName')}"
                        th:text="${error}">Validation error</p>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                    <input id="nip" th:field="*{nip}" type="tel" pattern="([0-9]{3}-)([0-9]{2}-)([0-9]{2}-)([0-9]{3})" title="Format: XXX-XX-XX-XXX" class="form-control" name="nip" placeholder="NIP" required>
-                    <p th:each="error : ${#fields.errors('nip')}"
+                    <input id="lastName" th:field="*{lastName}" type="text" class="form-control" name="lastName" placeholder="Last Name" required>
+                    <p th:each="error : ${#fields.errors('lastName')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input id="email" th:field="*{email}" type="email" class="form-control" name="email" placeholder="E-mail" required>
+                    <p th:each="error : ${#fields.errors('email')}"
                        th:text="${error}">Validation error</p>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
