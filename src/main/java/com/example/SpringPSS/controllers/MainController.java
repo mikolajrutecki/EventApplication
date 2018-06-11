@@ -167,4 +167,12 @@ public class MainController {
         userRepository.save(user);
         return new RedirectView("/admin/enable");
     }
+
+    @RequestMapping(value = "/admin/enable/delete{userId}", method = RequestMethod.GET)
+        public RedirectView adminDeleteUser(@RequestParam(value = "userId", required = false) int userId, Model model){
+            User user = userRepository.findUserById(userId);
+            userRepository.delete(user);
+            return new RedirectView("/admin/enable");
+        }
+
 }
