@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Hello Spring Security</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" th:href="@{/css/main.css}" />
+        <title>Admin page</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
@@ -19,6 +22,7 @@
 <ul>
     <li><a th:href="@{/admin/register}">Register user\admin</a></li>
     <li><a th:href="@{/admin/enable}">Enable or disable user\admin</a></li>
+    <li><a th:href="@{/admin/events}">Events</a></li>
     <li>Go back to the <a th:href="@{/index}">home page</a></li>
 </ul>
 </body>

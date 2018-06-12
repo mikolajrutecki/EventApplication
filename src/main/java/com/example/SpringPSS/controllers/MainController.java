@@ -1,6 +1,7 @@
 package com.example.SpringPSS.controllers;
 
 import com.example.SpringPSS.components.EmailSender;
+import com.example.SpringPSS.dtos.EventsWrapper;
 import com.example.SpringPSS.dtos.UserDto;
 import com.example.SpringPSS.dtos.UsersWrapper;
 import com.example.SpringPSS.entities.Event;
@@ -175,6 +176,34 @@ public class MainController {
         usersWrapper.setUsers((ArrayList<User>)userRepository.findAll());
         model.addAttribute("usersWrapper", usersWrapper);
         return "/admin/enable";
+    }
+
+    @RequestMapping(value = "/admin/events", method = RequestMethod.GET)
+    public String adminEvents(Model model){
+        EventsWrapper eventsWrapper = new EventsWrapper();
+        eventsWrapper.setEvents((ArrayList<Event>)eventRepository.findAll());
+        model.addAttribute("eventsWrapper", eventsWrapper);
+
+
+        return "/admin/events";
+    }
+
+    @RequestMapping(value = "/admin/events", method = RequestMethod.POST)
+    public RedirectView adminAddEvent(@RequestParam(value = "title", required = false) String title,
+                                      @RequestParam(value = "date", required = false) String date,
+                                      @RequestParam(value = "agenda", required = false) String agenda){
+        Event event = new Event(title, date, agenda);
+        eventRepository.save(event);
+
+        return new RedirectView("/admin/events");
+    }
+
+
+    @RequestMapping(value = "/admin/events/delete{eventId}", method = RequestMethod.GET)
+    public RedirectView adminDeleteEvent(@RequestParam(value = "eventId", required = false) int eventId, Model model){
+        Event event = eventRepository.findById(eventId);
+        eventRepository.delete(event);
+        return new RedirectView("/admin/events");
     }
 
     @RequestMapping(value = "/admin/enable/activate{userId}", method = RequestMethod.GET)
