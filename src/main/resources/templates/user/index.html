@@ -18,7 +18,7 @@
                         <div class="col-md-5">
                                 <form action="/user/index" method="POST" enctype="utf8">
                                         <div class="col-md-5" th:object="${events}"> 
-                                                <select class="form-control" id="eventsOrder" name="eventOrder" title="Wybierz event">
+                                                <select class="form-control" id="eventId" name="eventId" title="Wybierz event">
                                                     <option value=""></option>
                                                     <option th:each="event : ${events}"
                                                             th:value="${event.id}"
@@ -26,6 +26,7 @@
                                                 </select>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Save for event</button>
+                                        <a th:href="@{/index}">Go back to index page</a>
                                 </form>
                         </div>
                 </div>

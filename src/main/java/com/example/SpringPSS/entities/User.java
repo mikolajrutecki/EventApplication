@@ -1,5 +1,6 @@
 package com.example.SpringPSS.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,6 +43,7 @@ public class User {
 
     @ManyToMany
     @JoinTable(name = "user_events", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "event_id")})
+    @JsonBackReference
     Set<Event> events = new HashSet<>();
 
     @Column(nullable = false)

@@ -1,5 +1,7 @@
 package com.example.SpringPSS.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +37,7 @@ public class Event {
 //    private String feeding;
 
     @ManyToMany(mappedBy = "events")
+    @JsonManagedReference
     private Set<User> users = new HashSet<>();
 
     public Event() {

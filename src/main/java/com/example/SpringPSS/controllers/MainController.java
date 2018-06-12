@@ -63,17 +63,16 @@ public class MainController {
     }
 
     @RequestMapping(value = "/user/index", method = RequestMethod.POST)
-    public RedirectView addEventToUser(@RequestParam(value = "event.id", required = false) int eventId,
-                                       Model model) {
+    public String addEventToUser(@RequestParam(value = "eventId", required = false) int eventId,
+                                                  Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         User user = userRepository.findByUsername(userName);
         Event event = eventRepository.findById(eventId);
         user.getEvents().add(event);
         userRepository.save(user);
-        userRepository.flush();
 
-        return new RedirectView("/user/index");
+        return "/user/index";
     }
 
     @RequestMapping("/login")
