@@ -10,6 +10,8 @@ import com.example.SpringPSS.repositories.RoleRepository;
 import com.example.SpringPSS.repositories.UserRepository;
 import com.example.SpringPSS.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,9 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.security.Security;
+import java.util.*;
 
 @Controller
 public class MainController {
@@ -46,6 +47,11 @@ public class MainController {
     @GetMapping(path="/events")
     public @ResponseBody Iterable<Event> getAllEvents() { return eventRepository.findAll(); }
 
+    @ModelAttribute("events")
+    public Iterable<Event> events(){
+        return eventRepository.findAll();
+    }
+
     @RequestMapping("/index")
     public String index() {
         return "index";
@@ -54,6 +60,20 @@ public class MainController {
     @RequestMapping(value = "/user/index", method = RequestMethod.GET)
     public String userIndex() {
         return "/user/index";
+    }
+
+    @RequestMapping(value = "/user/index", method = RequestMethod.POST)
+    public RedirectView addEventToUser(@RequestParam(value = "event.id", required = false) int eventId,
+                                       Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        User user = userRepository.findByUsername(userName);
+        Event event = eventRepository.findById(eventId);
+        user.getEvents().add(event);
+        userRepository.save(user);
+        userRepository.flush();
+
+        return new RedirectView("/user/index");
     }
 
     @RequestMapping("/login")

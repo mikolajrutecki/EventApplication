@@ -1,13 +1,34 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-            <title>Trip calc</title>
+            <title>Event signing</title>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <body>
-            TUTAJ BEDZIE WIDOK UZYTKOWNIKA(ZAPIS NA EVENTY)
+        <div class="jumbotron">
+                        <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+                                Logged in user: <span sec:authentication="name"></span> |
+                                Privileges: <span sec:authentication="principal.authorities"></span>
+                        </div>
+                <div class="container">
+                        <h1 class="display-2">Sign for event</h1>
+                        <div class="col-md-5">
+                                <form action="/user/index" method="POST" enctype="utf8">
+                                        <div class="col-md-5" th:object="${events}"> 
+                                                <select class="form-control" id="eventsOrder" name="eventOrder" title="Wybierz event">
+                                                    <option value=""></option>
+                                                    <option th:each="event : ${events}"
+                                                            th:value="${event.id}"
+                                                            th:text="${event.title}"></option>
+                                                </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Save for event</button>
+                                </form>
+                        </div>
+                </div>
+        </div>
     </body>
 </html>
