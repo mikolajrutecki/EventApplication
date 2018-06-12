@@ -3,7 +3,9 @@ package com.example.SpringPSS.controllers;
 import com.example.SpringPSS.components.EmailSender;
 import com.example.SpringPSS.dtos.UserDto;
 import com.example.SpringPSS.dtos.UsersWrapper;
+import com.example.SpringPSS.entities.Event;
 import com.example.SpringPSS.entities.User;
+import com.example.SpringPSS.repositories.EventRepository;
 import com.example.SpringPSS.repositories.RoleRepository;
 import com.example.SpringPSS.repositories.UserRepository;
 import com.example.SpringPSS.services.UserService;
@@ -33,11 +35,16 @@ public class MainController {
     private UserService userService;
     @Autowired
     private EmailSender emailSender;
+    @Autowired
+    private EventRepository eventRepository;
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    @GetMapping(path="/events")
+    public @ResponseBody Iterable<Event> getAllEvents() { return eventRepository.findAll(); }
 
     @RequestMapping("/index")
     public String index() {

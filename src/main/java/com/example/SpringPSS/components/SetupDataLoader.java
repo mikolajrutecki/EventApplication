@@ -1,8 +1,10 @@
 package com.example.SpringPSS.components;
 
 import com.example.SpringPSS.dtos.UserDto;
+import com.example.SpringPSS.entities.Event;
 import com.example.SpringPSS.entities.Privilege;
 import com.example.SpringPSS.entities.Role;
+import com.example.SpringPSS.repositories.EventRepository;
 import com.example.SpringPSS.repositories.PrivilegeRepository;
 import com.example.SpringPSS.repositories.RoleRepository;
 import com.example.SpringPSS.services.UserService;
@@ -28,6 +30,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     private PrivilegeRepository privilegeRepository;
 
+    @Autowired
+    private EventRepository eventRepository;
+
     @Override
     @Transactional
     public void onApplicationEvent(final ContextRefreshedEvent event) {
@@ -47,6 +52,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             userService.registerNewUserAccount(new UserDto("user", "user", "user", "user", "user", Collections.singletonList(roleRepository.findByName("ROLE_USER")), true));
             userService.registerNewUserAccount(new UserDto("admin", "admin", "admin", "admin", "admin", Arrays.asList(roleRepository.findByName("ROLE_USER"), roleRepository.findByName("ROLE_ADMIN")),
                     true));
+            eventRepository.save(new Event("COS", "DATA", "AGENDA"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
