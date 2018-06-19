@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body>
+<div class=jumbotron>
+    <div class="container">
+        <h1 class="display-2">Events</h1>
+        <div class="col-sm-5">
+            <form action="/admin/events" method="POST" enctype="utf8">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Event title</th>
+                    </tr>
+                    <tr th:each="event : ${eventsWrapper.events}">
+                        <td th:text="${event.title}"></td>
+                        <td></td>
+                        <td><a th:href="@{../admin/events/delete?(eventId=${event.getId()})}">USUŃ</a></td>
+                    </tr>
+                </table>
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#add">Add Event</button>
+                <div id="add" class="collapse">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="title" type="text" class="form-control" name="title" placeholder="Event title" required>
+                        </div>
+            
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="date" type="datetime" class="form-control" name="date" placeholder="Event date" required>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="agenda" type="text" class="form-control" name="agenda" placeholder="Event agenda" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Event</button>
+                </div>
+            </form>
+            <a th:href="@{/admin/index}">Go back to admin page</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
